@@ -86,3 +86,29 @@
 - 해당 스타일을 선언한 컴포넌트에 종속적임
   - 부모 컴포넌트에 선언된 스타일일지라도 자식 컴포넌트에 영향 미치지 않음
   - 전역으로 선언하는 방식은 다음 강의
+
+## 1.6 Custom App
+
+### Global로 style 설정
+
+- 방법1. global props를 추가
+
+  ` <style jsx global><{``}</style> `
+
+  - 이 방법을 사용하더라도 해당 스타일이 선언됨 컴포넌트의 자식 컴포넌트들만 영향을 미침
+  - 다른 페이지들에도전역으로 이를 적용하려면 App Component를 사용
+    => pages 하위에 \_app.js 작성하여 커스터마이징
+
+- 방법2. App Component 커스터마이징
+  - 기본적으로 NextJS의 페이지 호출 시 아래와 같이 내장된 App Component를 호출
+    ```
+    export default function App({ Component, pageProps }) {
+       return <Component {...pageProps} />;
+    }
+    ```
+    - ex) about.js 호출 시 About 컴포넌트가 App 의 인자로 들어감
+    - Typescript의 경우 : https://nextjs.org/docs/basic-features/typescript#custom-app 참조
+  - App을 커스터마이징하려면 pages 아래에 \_app.js 를 작성해서 사용
+  - 이 때 styles/globals.css 를 import 시 전역 스타일을 적용 가능하다.
+    - globals.css는 App 컴포넌트 내에만 import 가능함을 유의
+    - module.css 파일 형태를 제외한 나머지 css도 App 컴포넌트에서만 import 가능 (https://nextjs.org/docs/messages/css-global)
