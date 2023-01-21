@@ -68,3 +68,21 @@
 1. className={`${styles.link} ${router.pathname === "/" ? styles.active : ""}`}
 2. [styles.link, router.pathname === "/" ? styles.active : ""].join(" ")
 ```
+
+## 1.5 Styles JSX
+
+### Styles JSX
+
+- NextJS에서 스타일을 추가하는 또다른 방식 (NextJS 고유의 방식)
+- style 태그에 jsx props를 추가 후 사용 가능
+
+  ` <style jsx>{`
+  nav {
+  background-color: tomato;
+  }
+  `}</style> `
+
+- 클래스명은 랜덤한 이름으로 생성됨 (jsx-OOOOOOOO...)
+- 해당 스타일을 선언한 컴포넌트에 종속적임
+  - 부모 컴포넌트에 선언된 스타일일지라도 자식 컴포넌트에 영향 미치지 않음
+  - 전역으로 선언하는 방식은 다음 강의
