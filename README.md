@@ -51,3 +51,20 @@
   - router는 location 에 대한 정보를 가지고 있음
 
   `const router = useRouter();`
+
+## 1.4 CSS Modules
+
+### CSS Module 패턴
+
+- 클래스 명을 텍스트가 아닌 js object의 property 형태로 사용
+  - ex) `<nav className={styles.nav}> ... </nav>`
+- 파일명 **.module.css** 로 생성 후 클래스 정의해서 사용
+- 기존의 className, class를 사용한 방식과 달리 실제로 렌더링되면 클래스명이 파일명\_클래스명\_\_랜덤텍스트 형태로 나옴
+  - ex) NavBar_nav\_\_OBiyO
+  - 고유의 클래스명을 가지게 되어 스타일이 겹치지 않게 됨
+- CSS Module 패턴으로 여러개의 className 사용하는 방법
+
+```
+1. className={`${styles.link} ${router.pathname === "/" ? styles.active : ""}`}
+2. [styles.link, router.pathname === "/" ? styles.active : ""].join(" ")
+```
