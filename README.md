@@ -112,3 +112,15 @@
   - 이 때 styles/globals.css 를 import 시 전역 스타일을 적용 가능하다.
     - globals.css는 App 컴포넌트 내에만 import 가능함을 유의
     - module.css 파일 형태를 제외한 나머지 css도 App 컴포넌트에서만 import 가능 (https://nextjs.org/docs/messages/css-global)
+
+## 2.0 Patterns
+
+### Layout Pattern
+
+- Layout 영역을 별도로 구성하고 App을 Layout 의 children 으로 넘겨주는 패턴
+- Navigation, Footer 등의 재사용
+
+### Head
+
+- NextJS에 내장된 next/head 라이브러리에서 import
+- 페이지 head에 엘리먼트를 추가하기 위한 내장 컴포넌트를 노출
