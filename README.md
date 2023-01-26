@@ -124,3 +124,16 @@
 
 - NextJS에 내장된 next/head 라이브러리에서 import
 - 페이지 head에 엘리먼트를 추가하기 위한 내장 컴포넌트를 노출
+
+## 2.1 Fetching Data
+
+### img 태그
+
+- NextJS에서는 img 태그 대신 'next/image'의 Image를 사용하는 것을 권장
+  - 더 나은 성능과 자동 이미지 최적화 제공
+
+### 테스트 데이터
+
+- TDMB의 영화 데이터 불러오기
+  - tdmb 사이트에서 api key 획득해서 사용하기
+  - https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}
