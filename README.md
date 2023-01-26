@@ -1,5 +1,9 @@
 # NextJS Introduction
 
+[NextJS Docs](https://nextjs.org/docs/getting-started)
+
+[NextJS 시작하기 - 노마드코더](https://nomadcoders.co/nextjs-fundamentals/lectures/3454)
+
 ## 1.0 Library vs Framework
 
 ### 라이브러리 vs 프레임워크
@@ -166,3 +170,26 @@
 ### env 사용
 
 - API Key와 같은 민감 정보를 공개하지 않기 위해 .env 파일에 정의하고, 해당 파일을 .gitignore에서 예외처리해서 관리하면 좋다.
+
+## 2.3 Server Side Rendering
+
+Server side rendering 은 선택의 문제
+
+- 데이터가 유효할 때 화면이 보여지는 것이 좋은지(ssr), 로딩 화면을 보여준 다음에 데이터를 받는 것이 좋은지(csr)
+- api 로딩이 오래 걸리는 경우라면 ssr에서 데이터를 모두 로드하고 화면에 보내주는 방식은 안 좋을 수도 있음
+
+### getServerSideProps()
+
+- NextJS 앱에서 client가 아닌 server에서만 실행되는 코드를 정의하는 함수 (pre-rendering 수행)
+  - API KEY를 여기 정의해도 됨 (클라이언트에는 전달되지 않으므로)
+- 페이지 내에 `export function getServerSideProps(){ }` 정의
+  - 클라이언트 내 api 로딩 없이 사전에 서버에서 호출해서 넘겨줄 때 사용하면 좋음
+  - 경우에 따라 async function으로 선언하기도 함 (await 필요할 때)
+  - `{props:{... }}` 형태의 객체를 return (ex. {props:{results}})
+    - props에 원하는 데이터를 넣을 수 있음
+    - return된 props는 해당 페이지에 props로 전달됨
+      - ex) `function Home({results})`
+      - \_app.js 정의할 때 있던 pageProps로 전달됨
+  - 이 경우 fetch 시 2.2 Redirect and Rewrite 에서 정의한 rewrite url(ex. /api/movies) 대신 absolute url을 사용해야 함
+    - 해당 url은 프론트에서만 작동되는 url이기 때문임
+    - 하지만 프론트엔드에서도 이미 브라우저에 url이 있으므로 http://localhost:3000/api/movies 와 같이 브라우저의 url을 추가해주면 사용 가능
