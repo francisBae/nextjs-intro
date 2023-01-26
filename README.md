@@ -134,6 +134,35 @@
 
 ### 테스트 데이터
 
-- TDMB의 영화 데이터 불러오기
-  - tdmb 사이트에서 api key 획득해서 사용하기
+- TMDB의 영화 데이터 불러오기
+  - tmdb 사이트에서 api key 획득해서 사용하기
   - https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}
+
+## 2.2 Redirect and Rewrite
+
+- NextJS에서 Redirect, Rewrite를 사용해 request로 들어오는 source url을 다른 destination url로 변경 가능하다.
+- next.config.js 에 redirects(), rewrites()를 작성하여 사용 가능 (각각 async 함수)
+  - next.config.js 는 수정 시 재시작 필요
+- API Key를 사용자로부터 숨기는 스킬로 사용 가능하다.
+
+### Redirect
+
+- redirects()는 source, destination 및 permanent 속성이 있는 객체의 배열을 return하는 비동기 함수
+- redirects()의 경우 URL이 명시적으로 변경된다.
+- source : 들어오는 request 경로 패턴 (request 경로)
+  - ex) `source: '/org/:path*`
+    - /org/ 아래의 path를 모두 destination으로 변경
+- destination: 라우팅하려는 경로 (redirect할 경로)
+  - ex) `destination: '/new/:path*'`
+    - `*` 옵션을 사용 시 위에 있는 org 하위 경로를 new 하위 경로로 치환 (패턴 매칭)
+- permanent: true인 경우 클라이언트와 search 엔진에 redirect를 영구적으로 cache하도록 지시하는 308 status code를 사용하고, false인 경우 일시적이고 cache되지 않은 307 status code를 사용
+
+### Rewrite
+
+- rewrites() 사용 시 들어오는 request 경로를 다른 destination 경로에 매핑 가능하다.
+  - ex) 외부 api인 https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY} 을 /api/movies 로 치환 가능
+- rewrites()은 URL 프록시 역할을 하고 destination 경로를 masking하여 사용자가 사이트에서 위치를 변경하지 않은 것처럼 보이게 한다. (새 페이지로 reroute되고 url에 변경사항을 표시하는 redirect와는 다름)
+
+### env 사용
+
+- API Key와 같은 민감 정보를 공개하지 않기 위해 .env 파일에 정의하고, 해당 파일을 .gitignore에서 예외처리해서 관리하면 좋다.
