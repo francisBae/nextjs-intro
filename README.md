@@ -193,3 +193,19 @@ Server side rendering 은 선택의 문제
   - 이 경우 fetch 시 2.2 Redirect and Rewrite 에서 정의한 rewrite url(ex. /api/movies) 대신 absolute url을 사용해야 함
     - 해당 url은 프론트에서만 작동되는 url이기 때문임
     - 하지만 프론트엔드에서도 이미 브라우저에 url이 있으므로 http://localhost:3000/api/movies 와 같이 브라우저의 url을 추가해주면 사용 가능
+
+## 2.5 Dynamic Routes
+
+### Dynamic Routes
+
+- NextJS에서 page에 대괄호([param])를 추가해 Dynamic Routes를 확장 가능하함
+- ex) /movies/{id} 형태의 url 호출 시 매핑되는 페이지를 작성하고 싶다면 pages/movies/[id].js 작성
+- 넘겨받은 url의 파라미터는 router(useRouter 사용)의 query 속성에서 확인 가능함
+  - ex) {id:1}
+- movies 폴더가 있을 때 /movies 페이지를 정의하고 싶다면 /movies/index.js 작성
+  - /movies/... 같이 하위 url이 없는 경우라면 폴더가 아닌 movies.js 만 pages 하위에 작성하면 됨
+
+### Catch all routes
+
+- 대괄호 안에 세 개의 점(...)을 추가하여 모든 경로를 포착하도록 Dynamic Routes를 확장 가능 (ex. [...id].js)
+  - 이런 경우 /movies/1 뿐만 아니라 /movies/1/2 등도 매핑 가능함
