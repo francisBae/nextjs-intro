@@ -228,3 +228,21 @@ router.push({
   `/movies/${id}` //클라이언트에게 주소로 제공하는 부분(as)
 })
 ```
+
+- 외부 url에 대해서는 router.push() 대신 window.location을 사용하는 것이 더 적합
+
+## 2.7 Catch All
+
+### catch-all URL
+
+- 무엇이든 캐치해 내는 URL
+  - ex) `/movies/Spider-Man/a/b/c/...`
+- dynamic routes의 파일 명을 [...params].js 로 변경
+  - ex) [id].js => [...id].js
+  - 이런 경우 기존 router의 query에 들어가던 id가 string이 아닌 Array<string>이 됨 (각 /마다 구분하여 들어감)
+
+### getServerSideProps (Context parameter)
+
+- params : 이 페이지에서 dynamic route(동적 경로)를 사용하는 경우 params에 route parameter가 포함됨
+- query : 쿼리 문자열을 나타내는 객체
+- getServerSideProps 함수에서 클라이언트 내에서 넘겨준 router query를 props로 리턴하게 하여 화면의 props로 활용 가능
