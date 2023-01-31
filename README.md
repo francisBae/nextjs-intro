@@ -209,3 +209,22 @@ Server side rendering 은 선택의 문제
 
 - 대괄호 안에 세 개의 점(...)을 추가하여 모든 경로를 포착하도록 Dynamic Routes를 확장 가능 (ex. [...id].js)
   - 이런 경우 /movies/1 뿐만 아니라 /movies/1/2 등도 매핑 가능함
+
+## 2.6 Movie Detail
+
+### router.push(url, as, options)
+
+- 클라이언트 측 페이지전환을 처리함 (next/link 통한 페이지 이동 시 사전에 넘겨줄 수 있는 정보들을 전달 가능)
+- url : 탐색할 Url
+  as : 브라우저 Url 표시줄에 표시될 경로에 대한 선택적 데코레이터 (사용자에게 이렇게 url을 보여주세요 하는 것)
+- 사용 예시
+
+```
+router.push({
+  pathname:`movies/${id}`,
+  query:{
+    title:title
+  },
+  `/movies/${id}` //클라이언트에게 주소로 제공하는 부분(as)
+})
+```
